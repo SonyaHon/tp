@@ -62,7 +62,7 @@ class TpServer extends TpBase {
 	/**
 	 *
 	 * @param {string} address
-	 * @param {string} [name] if not suggested, the name will be dinamicly calculated
+	 * @param {string} name
 	 * @returns {Promise<void>}
 	 */
 	async connect(address, name) {
@@ -72,6 +72,7 @@ class TpServer extends TpBase {
 			role: this.role,
 		});
 		await connection.ready();
+		this.connections[name] = connection;
 	}
 }
 
