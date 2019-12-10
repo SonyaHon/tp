@@ -22,7 +22,6 @@ tp.on('test', async function() {
 
 
 (async () => {
-
 	await tp2.connect('http://localhost:8000', 'tp');
 	let res = await tp2.connections.tp.emit('test');
 	console.log(res);

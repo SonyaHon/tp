@@ -27,7 +27,7 @@ class TpClient extends TpBase {
 	}
 
 	async emit(event, ...args) {
-		return await this.tpSock.send(event, args);
+		return await this.tpSock.send(event, ...args);
 	}
 }
 

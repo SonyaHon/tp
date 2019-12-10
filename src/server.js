@@ -1,11 +1,11 @@
 import SocketIoServer from 'socket.io';
-import SocketWrapper  from './socket-wrapper';
-import C              from './const';
-import nano           from 'nanoid';
-import LoggerServer   from './logger-server';
-import TpRouter       from './router';
-import TpBase         from './base';
-import TpClient       from './client';
+import SocketWrapper from './socket-wrapper';
+import C from './const';
+import nano from 'nanoid';
+import LoggerServer from './logger-server';
+import TpRouter from './router';
+import TpBase from './base';
+import TpClient from './client';
 
 class TpServer extends TpBase {
 
@@ -36,7 +36,7 @@ class TpServer extends TpBase {
 			let tpSock = new SocketWrapper(socket, this.socketRequestHandler.bind(this));
 			try {
 				const info = await tpSock.send(C.TECH.QUERY.GET_INFO, {
-					id:   this.id,
+					id  : this.id,
 					role: this.role,
 					name: this.name,
 				});
@@ -44,7 +44,7 @@ class TpServer extends TpBase {
 					...info,
 					tpSock,
 				});
-			} catch(e) {
+			} catch (e) {
 				this.logger.error(e.message);
 				socket.close();
 			}
@@ -55,8 +55,8 @@ class TpServer extends TpBase {
 	 *
 	 * @param {number=3000} port
 	 */
-	start(port = 3000) {
-		this.httpServer.listen(port);
+	async start(port = 3000) {
+		await new Promise(resolve => this.httpServer.listen(port, resolve));
 	}
 
 	/**
