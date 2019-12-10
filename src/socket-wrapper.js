@@ -1,6 +1,6 @@
-import nano   from 'nanoid';
+import nano from 'nanoid';
 import Packet from './packet';
-import C      from './const';
+import C from './const';
 
 class SocketWrapper {
 	constructor(socket, handler) {
@@ -8,19 +8,22 @@ class SocketWrapper {
 		this.handler = handler;
 
 		this.socket.on(C.TECH.EVENTS.PACKET_INCOMING, this.processIncoming.bind(this));
+		this.tempMeta = {};
 	}
 
 	async send(event, ...args) {
 		const packetId = nano();
 		const packet = new Packet({
-			id:   packetId,
+			id  : packetId,
 			meta: {
 				event,
+				...this.tempMeta
 			},
 			args: args,
 			data: undefined,
 		});
 
+		this.tempMeta = {};
 		return await new Promise((resolve, reject) => {
 			const timeout = setTimeout(() => {
 				reject(new Error('Timeout error'));
@@ -36,11 +39,15 @@ class SocketWrapper {
 		});
 	}
 
+	setMeta(meta) {
+		this.tempMeta = meta;
+	}
+
 	async processIncoming(data) {
 		const incPacket = Packet.fromSerialized(data);
 		const res = await this.handler(incPacket);
 		const resPacket = new Packet({
-			id:   incPacket.id,
+			id  : incPacket.id,
 			meta: {
 				event: incPacket.meta.event,
 			},

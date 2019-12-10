@@ -1,6 +1,6 @@
 import socketIoClient from 'socket.io-client';
-import SocketWrapper  from './socket-wrapper';
-import TpBase         from './base';
+import SocketWrapper from './socket-wrapper';
+import TpBase from './base';
 
 class TpClient extends TpBase {
 	/**
@@ -29,6 +29,12 @@ class TpClient extends TpBase {
 	async emit(event, ...args) {
 		return await this.tpSock.send(event, ...args);
 	}
+
+	setMeta(meta) {
+		this.tpSock.setMeta(meta);
+		return this;
+	}
+
 }
 
 export default TpClient;
