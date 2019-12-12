@@ -1,27 +1,28 @@
 {
-	"name"        : "tp",
-	"version"     : "1.0.0",
-	"main"        : "build/index",
-	"license"     : "MIT",
-	"scripts"     : {
+	"name":         "tp",
+	"version":      "1.0.0",
+	"main":         "build/index",
+	"license":      "MIT",
+	"scripts":      {
 		"build": "node_modules/.bin/babel ./src -d ./build",
-		"watch": "nodemon --watch ./src --exec yarn run build"
+		"watch": "nodemon --watch ./src --exec yarn run build",
+		"test":  "node_modules/.bin/mocha ./tests/tp.test.js"
 	},
 	"dependencies": {
-		"@babel/cli"                              : "^7.7.5",
-		"nodemon"                                 : "^2.0.1",
-		"@babel/core"                             : "^7.7.5",
+		"@babel/cli":                               "^7.7.5",
+		"nodemon":                                  "^2.0.1",
+		"@babel/core":                              "^7.7.5",
 		"@babel/plugin-proposal-optional-chaining": "^7.7.5",
-		"@babel/runtime"                          : "^7.7.5",
-		"@babel/plugin-transform-runtime"         : "^7.7.5",
-		"@babel/preset-env"                       : "^7.7.5",
-		"babel-plugin-implicit-function"          : "^0.1.1",
-		"fast-async"                              : "^6.3.8",
-		"nanoid"                                  : "^2.1.7",
-		"socket.io"                               : "^2.3.0",
-		"socket.io-client"                        : "^2.3.0",
-		"mocha"                                   : "^6.2.2",
-		"chai"                                    : "^4.2.0",
-		"is-arrow-function"                       : "^2.0.3"
+		"@babel/runtime":                           "^7.7.5",
+		"@babel/plugin-transform-runtime":          "^7.7.5",
+		"@babel/preset-env":                        "^7.7.5",
+		"babel-plugin-implicit-function":           "^0.1.1",
+		"fast-async":                               "^6.3.8",
+		"nanoid":                                   "^2.1.7",
+		"socket.io":                                "^2.3.0",
+		"socket.io-client":                         "^2.3.0",
+		"mocha":                                    "^6.2.2",
+		"chai":                                     "^4.2.0",
+		"is-arrow-function":                        "^2.0.3"
 	}
 }
