@@ -1,6 +1,7 @@
 import socketIoClient from 'socket.io-client';
 import SocketWrapper from './socket-wrapper';
 import TpBase from './base';
+import msgPackParser from 'socket.io-msgpack-parser';
 
 class TpClient extends TpBase {
 	/**
@@ -13,7 +14,9 @@ class TpClient extends TpBase {
 
 	constructor(props) {
 		super();
-		this.socket = socketIoClient(props?.address);
+		this.socket = socketIoClient(props?.address, {
+			parser: msgPackParser
+		});
 		this.role = props?.role || '';
 		this.name = props?.name || '';
 		this.tpSock = new SocketWrapper(this.socket, this.socketRequestHandler.bind(this));

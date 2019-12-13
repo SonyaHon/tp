@@ -45,6 +45,7 @@ class SocketWrapper {
 
 	async processIncoming(data) {
 		const incPacket = Packet.fromSerialized(data);
+		console.log(incPacket);
 		const res = await this.handler(incPacket);
 		const resPacket = new Packet({
 			id  : incPacket.id,

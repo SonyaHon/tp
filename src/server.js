@@ -6,6 +6,7 @@ import LoggerServer from './logger-server';
 import TpRouter from './router';
 import TpBase from './base';
 import TpClient from './client';
+import msgPackParser from 'socket.io-msgpack-parser';
 
 class TpServer extends TpBase {
 
@@ -21,6 +22,7 @@ class TpServer extends TpBase {
 		super();
 		this.server = new SocketIoServer(props.server, {
 			serveClient: false,
+			parser     : msgPackParser
 		});
 		this.logger = new LoggerServer();
 		this.id = nano();

@@ -1,3 +1,5 @@
+import Coder from '../../bin/src/index';
+
 class Packet {
 	constructor(props) {
 		this.id = props.id;
@@ -8,8 +10,8 @@ class Packet {
 
 
 	serialize() {
-		return JSON.stringify({
-			id:   this.id,
+		return Coder.encode({
+			id  : this.id,
 			meta: this.meta,
 			args: this.args,
 			data: this.data,
@@ -17,7 +19,7 @@ class Packet {
 	}
 
 	static fromSerialized(serialized) {
-		return new Packet(JSON.parse(serialized));
+		return new Packet(Coder.decode(serialized));
 	}
 }
 
